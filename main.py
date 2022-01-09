@@ -21,7 +21,8 @@ Data schema:
     {
         "<code>": {
             "name": "<name>",
-            "time": "<timestampe>"
+            "time": "<iso time string>",
+            "disabled": "<True|False>"
         }
     }
 """
