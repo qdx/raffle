@@ -100,9 +100,9 @@ class MyPrompt(Cmd):
 
     def do_enable(self, code):
         '''Enable certain code if disabled'''
-        if code not in tickets:
-            print("Not a valid code, ignore")
-            return
+        # if code not in tickets:
+            # print("Not a valid code, ignore")
+            # return
 
         data = load_data()
         if code not in data:
@@ -118,9 +118,9 @@ class MyPrompt(Cmd):
 
     def do_disable(self, code):
         '''Disable certain code'''
-        if code not in tickets:
-            print("Not a valid code, ignore")
-            return
+        # if code not in tickets:
+            # print("Not a valid code, ignore")
+            # return
 
         data = load_data()
         if code not in data:
@@ -150,10 +150,7 @@ class MyPrompt(Cmd):
         shortcuts.clear()
 
     def summary(self, data, show_code=False):
-        count = len(data.items())
-        prob = 1.0 / count * 100 if count != 0 else 100
-        print(f"目前参与抽奖人数：{count}, 中奖概率：{str(prob)[:4]}%")
-        print(f"以下是目前参与人员:")
+        count = 0
         for k in data.keys():
             if DISABLED_KEY in data[k] and data[k][DISABLED_KEY]:
                 continue
@@ -161,6 +158,10 @@ class MyPrompt(Cmd):
                 print(f"Code:{k}, Name:{data[k]['name']}")
             else:
                 print(f"Name:{data[k]['name']}")
+            count += 1
+        prob = 1.0 / count * 100 if count != 0 else 100
+        print(f"以上是目前参与人员:")
+        print(f"目前参与抽奖人数：{count}, 中奖概率：{str(prob)[:4]}%")
 
     def do_clearall(self, stub):
         '''Clear all check in data'''
@@ -202,12 +203,12 @@ class MyPrompt(Cmd):
 
         name = ""
         while name.strip() != "#q":
-            name = prompt('欢迎光临！请输入您的姓名:')
+            name = prompt('欢迎光临果果的周岁生日活动！请输入您的姓名:')
             if len(name) > 100:
                 print("您的名字太长了，俺记不住，麻烦您用个短一点的。")
                 continue
 
-            code = prompt('请输入你的4位验证码(请找邀请人索取):')
+            code = prompt('请输入你的4位验证码(请找Dexin索取):')
             clean_code = code.strip()
             if len(clean_code) > 4:
                 print("验证码只有四位噢")
